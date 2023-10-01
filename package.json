@@ -8,7 +8,8 @@
   "dependencies": {
     "@elysiajs/swagger": "^0.6.1",
     "apisauce": "^3.0.1",
-    "elysia": "latest"
+    "elysia": "^0.7.15",
+    "redis": "^4.6.10"
   },
   "devDependencies": {
     "bun-types": "latest"
