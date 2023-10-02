@@ -23,6 +23,8 @@ import {
 } from "@app/services/wakatime";
 import { InsightType } from "@app/types/wakatime";
 
+const PORT = Bun.env.PORT || 80;
+
 const app = new Elysia()
   .use(swagger())
   .state("name", "flla-api")
@@ -111,7 +113,7 @@ const app = new Elysia()
       .get("/status-bar", getStatusBar)
       .get("/user-agent", getUserAgent)
   )
-  .listen(3000);
+  .listen(PORT);
 
 console.log(
   `🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`
