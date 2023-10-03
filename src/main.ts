@@ -39,31 +39,27 @@ const app = new Elysia()
     description,
   }))
   .onBeforeHandle(async (ctx) => {
-    const redisClient = await redis.connect();
-    const cached = await redisClient.get(ctx.path);
-    redisClient.disconnect();
+    const cached = await redis.get<Record<string, any>>(ctx.path);
     if (cached) {
       ctx.store.cached_paths = { ...ctx.store.cached_paths, [ctx.path]: true };
-      return JSON.parse(cached);
+      return cached;
     }
   })
   .onAfterHandle(async (ctx) => {
     if (!ctx.store.cached_paths[ctx.path]) {
-      const redisClient = await redis.connect();
-      await redisClient.set(
+      await redis.set(
         ctx.path,
-        JSON.stringify({
+        {
           ...(ctx.response as Object),
           cache: {
             is_cached: true,
             expires_at: new Date(Date.now() + 60 * 60 * 24 * 1000),
           },
-        }),
+        },
         {
-          EX: 60 * 60 * 24,
+          ex: 60 * 60 * 24,
         }
       );
-      redisClient.disconnect();
     }
   })
   .group("wakatime", (app) =>
