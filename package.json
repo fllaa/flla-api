@@ -6,10 +6,10 @@
     "dev": "bun run --watch src/main.ts"
   },
   "dependencies": {
-    "@elysiajs/swagger": "^0.6.1",
+    "@elysiajs/swagger": "^0.8.3",
     "@upstash/redis": "^1.22.1",
     "apisauce": "^3.0.1",
-    "elysia": "^0.7.15"
+    "elysia": "^0.8.9"
   },
   "devDependencies": {
     "bun-types": "latest"
