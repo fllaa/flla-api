@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { swagger } from "@elysiajs/swagger";
+import { logger } from "@bogeychan/elysia-logger";
 
 import { redis } from "@app/lib/redis";
 import {
@@ -27,6 +28,11 @@ const PORT = Bun.env.PORT || 80;
 
 const app = new Elysia()
   .use(swagger())
+  .use(
+    logger({
+      autoLogging: true,
+    })
+  )
   .state("name", "flla-api")
   .state("version", 1)
   .state("author", "Fallah Andy Prakasa")
@@ -112,5 +118,15 @@ const app = new Elysia()
   .listen(PORT);
 
 console.log(
-  `🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`
+  `==============================================
+
+🦊 Elysia is running at ${app.server?.url}
+
+* ID: ${app.server?.id || "N/A"}
+* Enviroment: ${app.server?.development ? "DEVELOPMENT" : "PRODUCTION"}
+* Hostname: ${app.server?.hostname}
+* Port: ${app.server?.port}
+* Started at: ${new Date().toLocaleString()}
+
+==============================================`
 );
