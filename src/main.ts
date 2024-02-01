@@ -3,6 +3,7 @@ import { swagger } from "@elysiajs/swagger";
 import { logger } from "@bogeychan/elysia-logger";
 
 import { redis } from "@app/lib/redis";
+import { getGithubLanguages, getGithubStats } from "@app/services/github";
 import {
   getAllTimeSinceToday,
   getCommit,
@@ -114,6 +115,19 @@ const app = new Elysia()
       .get("/machines", getMachineNames)
       .get("/status-bar", getStatusBar)
       .get("/user-agent", getUserAgent)
+  )
+  .group("github", (app) =>
+    app
+      .get("/stats", ({ query }) => getGithubStats(query?.username), {
+        query: t.Object({
+          username: t.Optional(t.String()),
+        }),
+      })
+      .get("/languages", ({ query }) => getGithubLanguages(query?.username), {
+        query: t.Object({
+          username: t.Optional(t.String()),
+        }),
+      })
   )
   .listen(PORT);
 
