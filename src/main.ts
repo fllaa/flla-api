@@ -1,4 +1,5 @@
 import { Elysia, t } from "elysia";
+import cors from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
 import { logger } from "@bogeychan/elysia-logger";
 
@@ -30,6 +31,9 @@ const PORT = Bun.env.PORT ?? 80;
 
 const app = new Elysia()
   .use(swagger())
+  .use(cors({
+    origin: "*",
+  }))
   .use(
     logger({
       autoLogging: true,

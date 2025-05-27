@@ -6,6 +6,7 @@
       "dependencies": {
         "@apollo/client": "^3.9.2",
         "@bogeychan/elysia-logger": "^0.0.15",
+        "@elysiajs/cors": "^1.3.3",
         "@elysiajs/swagger": "^0.8.3",
         "@upstash/redis": "^1.22.1",
         "apisauce": "^3.0.1",
@@ -20,6 +21,8 @@
     "@apollo/client": ["@apollo/client@3.13.8", "", { "dependencies": { "@graphql-typed-document-node/core": "^3.1.1", "@wry/caches": "^1.0.0", "@wry/equality": "^0.5.6", "@wry/trie": "^0.5.0", "graphql-tag": "^2.12.6", "hoist-non-react-statics": "^3.3.2", "optimism": "^0.18.0", "prop-types": "^15.7.2", "rehackt": "^0.1.0", "symbol-observable": "^4.0.0", "ts-invariant": "^0.10.3", "tslib": "^2.3.0", "zen-observable-ts": "^1.2.5" }, "peerDependencies": { "graphql": "^15.0.0 || ^16.0.0", "graphql-ws": "^5.5.5 || ^6.0.3", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc", "subscriptions-transport-ws": "^0.9.0 || ^0.11.0" }, "optionalPeers": ["graphql-ws", "react", "react-dom", "subscriptions-transport-ws"] }, "sha512-YM9lQpm0VfVco4DSyKooHS/fDTiKQcCHfxr7i3iL6a0kP/jNO5+4NFK6vtRDxaYisd5BrwOZHLJpPBnvRVpKPg=="],
 
     "@bogeychan/elysia-logger": ["@bogeychan/elysia-logger@0.0.15", "", { "dependencies": { "pino": "8.17.1" }, "peerDependencies": { "elysia": ">= 0.8.3" } }, "sha512-jhMssUxuat2qCgKzfqdsg6bYTtR5ws3iDagf9tknOYM5qHosjVcC54IZhuS7YnYWr6aphNEhKTMN95zPIXOhTw=="],
+
+    "@elysiajs/cors": ["@elysiajs/cors@1.3.3", "", { "peerDependencies": { "elysia": ">= 1.3.0" } }, "sha512-mYIU6PyMM6xIJuj7d27Vt0/wuzVKIEnFPjcvlkyd7t/m9xspAG37cwNjFxVOnyvY43oOd2I/oW2DB85utXpA2Q=="],
 
     "@elysiajs/swagger": ["@elysiajs/swagger@0.8.5", "", { "dependencies": { "lodash.clonedeep": "^4.5.0", "openapi-types": "^12.1.3" }, "peerDependencies": { "elysia": ">= 0.8.0" } }, "sha512-8u4poCU62z8lgWuf4Edp84j6ZOdVLGMuFfbd85T/s7bEKUYHUdhbdd9lH5HFf8EKoJTmhpd+OyO4TxOF+vmOcA=="],
 
