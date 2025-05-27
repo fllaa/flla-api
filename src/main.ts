@@ -24,8 +24,9 @@ import {
   getUserAgent,
 } from "@app/services/wakatime";
 import { InsightType } from "@app/types/wakatime";
+import { postCompletion } from "@app/services/dashscope";
 
-const PORT = Bun.env.PORT || 80;
+const PORT = Bun.env.PORT ?? 80;
 
 const app = new Elysia()
   .use(swagger())
@@ -53,7 +54,11 @@ const app = new Elysia()
     }
   })
   .onAfterHandle(async (ctx) => {
-    if (!ctx.store.cached_paths[ctx.path]) {
+    const whitelistPaths = [
+      "/chats/completions",
+    ]
+
+    if (!ctx.store.cached_paths[ctx.path] && !whitelistPaths.includes(ctx.path)) {
       await redis.set(
         ctx.path,
         {
@@ -69,6 +74,14 @@ const app = new Elysia()
       );
     }
   })
+  .group("chats", (app) =>
+    app.post("/completions", async ({ body }) => postCompletion(body.prompt, body.sessionId), {
+      body: t.Object({
+        prompt: t.String(),
+        sessionId: t.Optional(t.String()),
+      }),
+    })
+  )
   .group("wakatime", (app) =>
     app
       .get("/", getMe)
